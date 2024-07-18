@@ -20,8 +20,8 @@ import requests
 import psutil
 import os
 
-TOKEN = 'IL_TUO_TOKEN_DEL_BOT_DISCORD'
-CHANNEL_ID = 123456789  # Sostituisci con l'ID del canale Discord
+TOKEN = '5b66ee4163dbd8ad77ddad3a1344bb8e9410a141a916bd5a3c78738c5f7ff5de'
+CHANNEL_ID = 1263382252050583556  # Sostituisci con l'ID del canale Discord
 
 intents = discord.Intents.default()
 client = discord.Client(intents=intents)
