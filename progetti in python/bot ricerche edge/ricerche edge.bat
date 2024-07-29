@@ -1,3 +1,3 @@
 @ECHO OFF
-python google-search-bot.py
+python bing-search-bot.py
 pause
