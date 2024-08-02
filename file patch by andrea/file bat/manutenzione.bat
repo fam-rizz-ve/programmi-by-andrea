@@ -40,11 +40,11 @@ if errorlevel ==3 (goto tutto_dritto)
 if errorlevel ==2 (goto fine)
 :aggiornamento_applicazioni
 cls
-winget upgrade --all
+winget upgrade --all --accept-package-agreements --accept-source-agreements
 :tutto_dritto
 PowerShell -NoProfile -Command "Clear-RecycleBin -Force"
 del /q/f/s %TEMP%\
-winget upgrade --all --accept-package-agreements --accept-source-agreements --uninstall-previous
+winget upgrade --all --accept-package-agreements --accept-source-agreements
 :fine
 cls
 echo grazie per aver usufruito del nostro servizio

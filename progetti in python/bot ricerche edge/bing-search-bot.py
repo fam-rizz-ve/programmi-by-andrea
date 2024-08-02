@@ -26,14 +26,16 @@ def get_edge_driver():
     options.add_argument("--no-first-run")
     options.add_argument("--no-default-browser-check")
     options.add_argument("--start-maximized")
-    options.add_experimental_option("excludeSwitches", ["enable-logging"])
-    options.add_argument("--ignore-certificate-errors")
-
+    options.add_experimental_option("excludeSwitches", ["enable-automation"])
+    options.add_experimental_option('useAutomationExtension', False)
+    options.add_argument("--disable-blink-features=AutomationControlled")
+    
     # Usa un profilo temporaneo per ogni sessione
     temp_profile = os.path.join(os.getcwd(), f"edge_temp_profile_{random.randint(1000, 9999)}")
     options.add_argument(f"--user-data-dir={temp_profile}")
 
     driver = webdriver.Edge(service=service, options=options)
+    driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
     return driver
 
 def wait_for_element(driver, by, value, timeout=10):
@@ -47,9 +49,9 @@ def wait_for_element(driver, by, value, timeout=10):
 
 def is_logged_in(driver):
     driver.get("https://www.bing.com")
-    time.sleep(5)  # Attendi il caricamento della pagina
+    time.sleep(random.uniform(3, 5))  # Attesa randomizzata
     try:
-        # Cerca un elemento che indica che l'utente è loggato, ad esempio il nome utente o l'icona del profilo
+        # Cerca un elemento che indica che l'utente è loggato
         profile_element = driver.find_element(By.ID, "id_n")  # Modifica questo ID se necessario
         return True
     except NoSuchElementException:
@@ -61,7 +63,7 @@ def login_to_microsoft_account(driver, email, password):
         logout(driver)
 
     driver.get("https://login.live.com/")
-    time.sleep(5)  # Attendi il caricamento completo della pagina
+    time.sleep(random.uniform(3, 5))  # Attesa randomizzata
     
     # Inserisci email
     email_input = wait_for_element(driver, By.NAME, "loginfmt")
@@ -69,7 +71,7 @@ def login_to_microsoft_account(driver, email, password):
         email_input.clear()
         email_input.send_keys(email)
         email_input.send_keys(Keys.RETURN)
-        time.sleep(5)
+        time.sleep(random.uniform(2, 4))
     else:
         print("Elemento email non trovato. Verifica la pagina di login.")
         return False
@@ -80,7 +82,7 @@ def login_to_microsoft_account(driver, email, password):
         password_input.clear()
         password_input.send_keys(password)
         password_input.send_keys(Keys.RETURN)
-        time.sleep(5)
+        time.sleep(random.uniform(2, 4))
     else:
         print("Elemento password non trovato. Possibile errore nel login.")
         return False
@@ -89,7 +91,7 @@ def login_to_microsoft_account(driver, email, password):
     stay_signed_in = wait_for_element(driver, By.ID, "idSIButton9")
     if stay_signed_in:
         stay_signed_in.click()
-        time.sleep(5)
+        time.sleep(random.uniform(2, 4))
 
     # Verifica se il login è avvenuto con successo
     if is_logged_in(driver):
@@ -100,17 +102,23 @@ def login_to_microsoft_account(driver, email, password):
         return False
 
 def logout(driver):
-    logout_url = "https://www.bing.com/fd/auth/signout?provider=windows_live_id&return_url=https%3a%2f%2fwww.bing.com%2f%3fwlsso%3d0"
-    driver.get(logout_url)
-    time.sleep(5)  # Attendi che il logout sia completato
-    print("Logout effettuato.")
+    driver.delete_all_cookies()
+    driver.get("https://www.bing.com")
+    time.sleep(random.uniform(3, 5))
+    print("Cookies cancellati e pagina ricaricata.")
 
 def bing_search_bot(account):
     driver = get_edge_driver()
     
     try:
-        if not login_to_microsoft_account(driver, account["email"], account["password"]):
-            print(f"Impossibile effettuare il login per l'account {account['email']}. Passaggio al successivo.")
+        for attempt in range(3):  # Prova il login fino a 3 volte
+            if login_to_microsoft_account(driver, account["email"], account["password"]):
+                break
+            else:
+                print(f"Tentativo di login {attempt+1} fallito. Riprovo...")
+                time.sleep(random.uniform(5, 10))
+        else:
+            print(f"Impossibile effettuare il login per l'account {account['email']} dopo 3 tentativi. Passaggio al successivo.")
             return
 
         successful_searches = 0
@@ -118,12 +126,14 @@ def bing_search_bot(account):
             try:
                 search_letter = random.choice(string.ascii_lowercase)
                 driver.get("https://www.bing.com")
+                time.sleep(random.uniform(2, 4))
                 
                 search_box = wait_for_element(driver, By.NAME, "q")
                 if not search_box:
                     continue
 
                 search_box.send_keys(search_letter)
+                time.sleep(random.uniform(1, 2))
 
                 suggestions = wait_for_element(driver, By.CSS_SELECTOR, "ul.sa_drw li", timeout=5)
 
