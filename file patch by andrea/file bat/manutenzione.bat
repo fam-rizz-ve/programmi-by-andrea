@@ -49,6 +49,7 @@ if errorlevel ==2 (goto domanda_controllo_integrità)
 :aggiornamento_applicazioni
 cls
 winget upgrade --all --accept-package-agreements --accept-source-agreements
+<<<<<<< HEAD
 :domanda_controllo_integrità
 cls
 echo vuoi fare un controllo integrità?
@@ -86,6 +87,12 @@ sfc /scannow
 wuauclt /detectnow /updatenow
 "%ProgramFiles%\Windows Defender\MpCmdRun.exe" -SignatureUpdate
 "%ProgramFiles%\Windows Defender\MpCmdRun.exe" -Scan -ScanType 1
+=======
+:tutto_dritto
+PowerShell -NoProfile -Command "Clear-RecycleBin -Force"
+del /q/f/s %TEMP%\
+winget upgrade --all --accept-package-agreements --accept-source-agreements
+>>>>>>> 6f94f104505ee4997fc16fda5f0380896b5cca6e
 :fine
 cls
 echo grazie per aver usufruito del nostro servizio
