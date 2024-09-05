@@ -3,6 +3,8 @@ import sys
 import os
 import traceback
 import time
+import random
+import string
 from selenium import webdriver
 from selenium.webdriver.edge.service import Service
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
@@ -11,8 +13,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import TimeoutException, WebDriverException
-import random
-import string
 
 def install_dependencies():
     print("Installazione delle dipendenze...")
@@ -90,20 +90,26 @@ def bing_search_bot():
                     continue
 
                 search_box.send_keys(search_letter)
+                time.sleep(2)  # Attesa aggiuntiva per assicurarsi che i suggerimenti siano caricati
 
                 # Attendi che appaiano i suggerimenti
                 suggestions = wait_for_element(driver, By.CSS_SELECTOR, "ul.sa_drw li", timeout=5)
 
                 if suggestions:
                     suggestions = driver.find_elements(By.CSS_SELECTOR, "ul.sa_drw li")
-                    random_suggestion = random.choice(suggestions)
-                    print(f"Ricerca {successful_searches + 1}:")
-                    print(f"Lettera cercata: {search_letter}")
-                    print(f"Suggerimento selezionato: {random_suggestion.text}")
-                    random_suggestion.click()
+                    for suggestion in suggestions:
+                        # Controlla se il suggerimento ha una descrizione sotto
+                        if suggestion.find_elements(By.CSS_SELECTOR, "div.b_secondaryLabel"):
+                            print(f"Ricerca {successful_searches + 1}:")
+                            print(f"Lettera cercata: {search_letter}")
+                            print(f"Suggerimento selezionato: {suggestion.text}")
+                            suggestion.click()
+                            break
+                    else:
+                        print(f"Ricerca {successful_searches + 1}: Nessun suggerimento con descrizione trovato per la lettera: {search_letter}")
+                        search_box.send_keys(Keys.RETURN)
                 else:
-                    print(f"Ricerca {successful_searches + 1}:")
-                    print(f"Nessun suggerimento trovato per la lettera: {search_letter}")
+                    print(f"Ricerca {successful_searches + 1}: Nessun suggerimento trovato per la lettera: {search_letter}")
                     search_box.send_keys(Keys.RETURN)
 
                 # Attendi il caricamento della pagina dei risultati
@@ -135,7 +141,7 @@ def bing_search_bot():
 if __name__ == "__main__":
     print("ATTENZIONE: Questo script utilizzerà il tuo profilo principale di Edge.")
     print("Ciò potrebbe influenzare le tue impostazioni personali e la cronologia di navigazione.")
-    print("Lo script eseguirà esattamente 30 ricerche riuscite, attendendo 30 secondi tra ogni ricerca.")
+    print("Lo script eseguirà esattamente 30 ricerche riuscite, attendendo 10 secondi tra ogni ricerca.")
     print("Lo script verrà eseguito automaticamente senza richiedere ulteriori conferme.")
     
     install_dependencies()
