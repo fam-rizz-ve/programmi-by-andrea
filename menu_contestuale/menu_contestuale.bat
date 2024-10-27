@@ -31,4 +31,4 @@ if not exist main.py (
 )
 
 echo Argomenti passati a Python: %*
-python main.py %*
+python main.py "%*"

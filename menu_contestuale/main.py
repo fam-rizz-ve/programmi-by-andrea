@@ -27,6 +27,7 @@ def aggiungi_al_menu_contestuale():
         print(f"Errore durante l'aggiunta del menu contestuale: {e}")
 
 def converti_file(percorso_file):
+    percorso_file = os.path.normpath(percorso_file)
     estensione = os.path.splitext(percorso_file)[1].lower()
     
     formati_immagine = [".jpg", ".png", ".bmp", ".gif", ".tiff", ".webp"]
