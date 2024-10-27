@@ -1,0 +1,6 @@
+Pillow
+rembg
+moviepy
+docx2pdf
+pypandoc
+pyinstaller
