@@ -116,7 +116,7 @@ if errorlevel ==2 (goto :svuota_cache_domanda)
 	PowerShell -NoProfile -Command "Clear-RecycleBin -Force"
 	del /q/f/s %TEMP%\
 	cleanmgr /sagerun:1
-	winget upgrade --all --accept-package-agreements --accept-source-agreements
+	winget upgrade --all --accept-package-agreements --accept-source-agreements --include-unknown
 	dism /online /cleanup-image /restorehealth
 	sfc /scannow
 	wuauclt /detectnow /updatenow
