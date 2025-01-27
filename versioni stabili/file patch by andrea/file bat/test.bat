@@ -1,5 +1,3 @@
 @echo off
-color 40
-set i = i+1
-echo inizializzazione...
-if '%i%' <'300' (pause)
+start "C:\Program Files (x86)\Trust\GamingMouse-2.exe"
+pause

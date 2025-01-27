@@ -100,10 +100,10 @@ if errorlevel ==2 (goto :svuota_cache_domanda)
 	echo vuoi aggiornare windows?
 	choice /c SNC /m "vuoi procedere? clicca: S per accettare; N per saltare; C per continuare in autonomia"
 	if errorlevel ==3 (goto tutto_dritto)
-	if errorlevel ==2 (goto domanda_controllo_on_windows_defender)
+	if errorlevel ==2 (goto domanda_controllo_con_windows_defender)
 :aggiornamento_windows
 	wuauclt /detectnow /updatenow
-:domanda_controllo_on_windows_defender
+:domanda_controllo_con_windows_defender
 	cls
 	echo usare windows defender per scovare eventuLI Malware?
 	choice /c SNC /m "vuoi procedere? clicca: S per accettare; N per saltare; C per continuare in autonomia"
