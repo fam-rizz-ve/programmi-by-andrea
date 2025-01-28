@@ -1,3 +1,2 @@
-X = 5.5
-Y = 5
-print(Y + X)
+numero_intero = 1
+print(type(numero_intero))
