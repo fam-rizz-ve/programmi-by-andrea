@@ -85,6 +85,10 @@ if errorlevel ==2 (goto :svuota_cache_domanda)
 	cls
 	winget upgrade --all --accept-package-agreements --accept-source-agreements
 	<<<<<<< HEAD
+	scoop update vscode
+	scoop update python
+	scoop update 7zip
+	scoop update git
 :domanda_controllo_integrità
 	cls
 	echo vuoi fare un controllo integrità?
@@ -112,6 +116,7 @@ if errorlevel ==2 (goto :svuota_cache_domanda)
 :scannerizzazione_dispositivo
 	"%ProgramFiles%\Windows Defender\MpCmdRun.exe" -SignatureUpdate
 	"%ProgramFiles%\Windows Defender\MpCmdRun.exe" -Scan -ScanType 1
+	goto fine
 :tutto_dritto
 	PowerShell -NoProfile -Command "Clear-RecycleBin -Force"
 	del /q/f/s %TEMP%\
@@ -122,6 +127,10 @@ if errorlevel ==2 (goto :svuota_cache_domanda)
 	wuauclt /detectnow /updatenow
 	"%ProgramFiles%\Windows Defender\MpCmdRun.exe" -SignatureUpdate
 	"%ProgramFiles%\Windows Defender\MpCmdRun.exe" -Scan -ScanType 1
+	scoop update vscode
+	scoop update python
+	scoop update 7zip
+	scoop update git
 :fine
 	cls
 	echo grazie per aver usufruito del nostro servizio
