@@ -1,2 +1,3 @@
-numero_intero = 1
-print(type(numero_intero))
+stringa = "hello word"
+super_stringa = stringa.replace("word", "python")
+print(super_stringa)
