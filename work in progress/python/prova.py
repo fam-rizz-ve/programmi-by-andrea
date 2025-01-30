@@ -1,3 +1,4 @@
-stringa = "hello word"
-super_stringa = stringa.replace("word", "python")
-print(super_stringa)
+numero = 10
+while not numero == 0:
+    print(numero)
+    numero -= 1

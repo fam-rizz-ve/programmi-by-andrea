@@ -89,6 +89,7 @@ if errorlevel ==2 (goto :svuota_cache_domanda)
 	scoop update python
 	scoop update 7zip
 	scoop update git
+	python.exe -m pip install --upgrade pip
 :domanda_controllo_integrità
 	cls
 	echo vuoi fare un controllo integrità?
@@ -131,6 +132,7 @@ if errorlevel ==2 (goto :svuota_cache_domanda)
 	scoop update python
 	scoop update 7zip
 	scoop update git
+	python.exe -m pip install --upgrade pip
 :fine
 	cls
 	echo grazie per aver usufruito del nostro servizio
