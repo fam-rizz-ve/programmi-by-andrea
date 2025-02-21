@@ -85,6 +85,11 @@ if errorlevel ==2 (goto :svuota_cache_domanda)
 	cls
 	winget upgrade --all --accept-package-agreements --accept-source-agreements
 	<<<<<<< HEAD
+	scoop update vscode
+	scoop update python
+	scoop update 7zip
+	scoop update git
+	python.exe -m pip install --upgrade pip
 :domanda_controllo_integrità
 	cls
 	echo vuoi fare un controllo integrità?
@@ -100,10 +105,10 @@ if errorlevel ==2 (goto :svuota_cache_domanda)
 	echo vuoi aggiornare windows?
 	choice /c SNC /m "vuoi procedere? clicca: S per accettare; N per saltare; C per continuare in autonomia"
 	if errorlevel ==3 (goto tutto_dritto)
-	if errorlevel ==2 (goto domanda_controllo_on_windows_defender)
+	if errorlevel ==2 (goto domanda_controllo_con_windows_defender)
 :aggiornamento_windows
 	wuauclt /detectnow /updatenow
-:domanda_controllo_on_windows_defender
+:domanda_controllo_con_windows_defender
 	cls
 	echo usare windows defender per scovare eventuLI Malware?
 	choice /c SNC /m "vuoi procedere? clicca: S per accettare; N per saltare; C per continuare in autonomia"
@@ -112,6 +117,7 @@ if errorlevel ==2 (goto :svuota_cache_domanda)
 :scannerizzazione_dispositivo
 	"%ProgramFiles%\Windows Defender\MpCmdRun.exe" -SignatureUpdate
 	"%ProgramFiles%\Windows Defender\MpCmdRun.exe" -Scan -ScanType 1
+	goto fine
 :tutto_dritto
 	PowerShell -NoProfile -Command "Clear-RecycleBin -Force"
 	del /q/f/s %TEMP%\
@@ -122,6 +128,11 @@ if errorlevel ==2 (goto :svuota_cache_domanda)
 	wuauclt /detectnow /updatenow
 	"%ProgramFiles%\Windows Defender\MpCmdRun.exe" -SignatureUpdate
 	"%ProgramFiles%\Windows Defender\MpCmdRun.exe" -Scan -ScanType 1
+	scoop update vscode
+	scoop update python
+	scoop update 7zip
+	scoop update git
+	python.exe -m pip install --upgrade pip
 :fine
 	cls
 	echo grazie per aver usufruito del nostro servizio
