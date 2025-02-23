@@ -84,12 +84,13 @@ if errorlevel ==2 (goto :svuota_cache_domanda)
 :aggiornamento_applicazioni
 	cls
 	winget upgrade --all --accept-package-agreements --accept-source-agreements
-	<<<<<<< HEAD
-	scoop update vscode
-	scoop update python
-	scoop update 7zip
-	scoop update git
-	python.exe -m pip install --upgrade pip
+	if exist %USERPROFILE%\scoop (call scoop update * --global)
+	where python.exe >nul 2>&1
+if %errorlevel% neq 0 (
+    echo Python non è installato.
+) else (
+    echo Python installato. Aggiornamento di pip...
+    python.exe -m pip install --upgrade pip
 :domanda_controllo_integrità
 	cls
 	echo vuoi fare un controllo integrità?
@@ -128,11 +129,13 @@ if errorlevel ==2 (goto :svuota_cache_domanda)
 	wuauclt /detectnow /updatenow
 	"%ProgramFiles%\Windows Defender\MpCmdRun.exe" -SignatureUpdate
 	"%ProgramFiles%\Windows Defender\MpCmdRun.exe" -Scan -ScanType 1
-	scoop update vscode
-	scoop update python
-	scoop update 7zip
-	scoop update git
-	python.exe -m pip install --upgrade pip
+	if exist %USERPROFILE%\scoop (call scoop update * --global)
+	where python.exe >nul 2>&1
+if %errorlevel% neq 0 (
+    echo Python non è installato.
+) else (
+    echo Python installato. Aggiornamento di pip...
+    python.exe -m pip install --upgrade pip
 :fine
 	cls
 	echo grazie per aver usufruito del nostro servizio
