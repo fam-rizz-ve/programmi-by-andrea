@@ -1,4 +1,8 @@
-dict1 = {"nome" == "sciampo","costo" == 35}
-prodotti = dict()
-prodotti[dict1["nome"]] = dict
-print(prodotti)
+a = {"banana": "buona"}
+
+try:
+    x = a["banana"]
+except:
+    print("d")
+finally:
+    print("G")
