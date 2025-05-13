@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "utility:item/chatgpt_image_9_mag_2025_16_44_55_1"
+  }
+}

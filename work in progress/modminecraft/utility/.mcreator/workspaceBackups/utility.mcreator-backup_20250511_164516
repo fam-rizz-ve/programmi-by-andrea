@@ -1,0 +1,256 @@
+{
+  "mod_elements": [
+    {
+      "name": "NightelmetHelmetTickEvent",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "nightelmet_helmet_tick_event",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/utility/procedures/NightelmetHelmetTickEventProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Nightelmet",
+      "type": "armor",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "nightelmet",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/utility/models/item/nightelmet_helmet.json",
+          "src/main/java/net/mcreator/utility/item/NightelmetItem.java"
+        ]
+      }
+    },
+    {
+      "name": "Flatdimention",
+      "type": "dimension",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "flatdimention",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/utility/models/block/flatdimention_portal_ns.json",
+          "src/main/java/net/mcreator/utility/world/teleporter/FlatdimentionTeleporter.java",
+          "src/main/resources/data/utility/dimension/flatdimention.json",
+          "src/main/resources/assets/utility/blockstates/flatdimention_portal.json",
+          "src/main/resources/data/utility/dimension_type/flatdimention.json",
+          "src/main/java/net/mcreator/utility/world/teleporter/FlatdimentionPortalShape.java",
+          "src/main/java/net/mcreator/utility/block/FlatdimentionPortalBlock.java",
+          "src/main/resources/assets/utility/models/block/flatdimention_portal_ew.json"
+        ]
+      }
+    },
+    {
+      "name": "Utility",
+      "type": "tab",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "utility",
+      "metadata": {
+        "files": []
+      }
+    },
+    {
+      "name": "Flatkey",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "flatkey",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/utility/models/item/flatkey.json",
+          "src/main/java/net/mcreator/utility/item/FlatkeyItem.java"
+        ]
+      }
+    },
+    {
+      "name": "Overwordkey",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "overwordkey",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/utility/item/OverwordkeyItem.java",
+          "src/main/resources/assets/utility/models/item/overwordkey.json"
+        ]
+      }
+    },
+    {
+      "name": "FlatkeyRightclickedOnBlock",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "flatkey_rightclicked_on_block",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/utility/procedures/FlatkeyRightclickedOnBlockProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Netherkey",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "netherkey",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/utility/models/item/netherkey.json",
+          "src/main/java/net/mcreator/utility/item/NetherkeyItem.java"
+        ]
+      }
+    },
+    {
+      "name": "Endkey",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "endkey",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/utility/item/EndkeyItem.java",
+          "src/main/resources/assets/utility/models/item/endkey.json"
+        ]
+      }
+    },
+    {
+      "name": "OverwordkeyRightclickedOnBlock",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "overwordkey_rightclicked_on_block",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/utility/procedures/OverwordkeyRightclickedOnBlockProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    },
+    {
+      "name": "NetherKeyRightclickedOnBlock",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "nether_key_rightclicked_on_block",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/utility/procedures/NetherKeyRightclickedOnBlockProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    },
+    {
+      "name": "EndKeyRightclickedOnBlock",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "end_key_rightclicked_on_block",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/utility/procedures/EndKeyRightclickedOnBlockProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    }
+  ],
+  "variable_elements": [
+    {
+      "name": "last_key",
+      "type": "string",
+      "scope": "map",
+      "value": "\"\""
+    }
+  ],
+  "sound_elements": [],
+  "tag_elements": {
+    "BLOCKS:minecraft:overworld_carver_replaceables": [
+      "~Blocks.DIRT#0"
+    ]
+  },
+  "tab_element_order": {},
+  "language_map": {
+    "en_us": {
+      "item.utility.endkey": "end key",
+      "item.utility.flatkey": "Flat key",
+      "item.utility.nightelmet_helmet": "Night Helmet",
+      "item.utility.overwordkey": "Overword key",
+      "item.utility.netherkey": "nether key",
+      "item_group.utility.utility": "Utility"
+    }
+  },
+  "foldersRoot": {
+    "name": "~",
+    "children": [
+      {
+        "name": "key",
+        "children": []
+      }
+    ]
+  },
+  "workspaceSettings": {
+    "modid": "utility",
+    "modName": "utility",
+    "version": "0.0.2",
+    "author": "Andrea, MCreator",
+    "websiteURL": "https://mcreator.net",
+    "license": "Not specified",
+    "serverSideOnly": false,
+    "modPicture": "chatgpt_image_8_mag_2025_17_10_55_1",
+    "requiredMods": [],
+    "dependencies": [],
+    "dependants": [],
+    "mcreatorDependencies": [],
+    "currentGenerator": "forge-1.20.1",
+    "credits": "Created using mod maker MCreator - https://mcreator.net/about",
+    "modElementsPackage": "net.mcreator.utility"
+  },
+  "mcreatorVersion": 202500113416
+}

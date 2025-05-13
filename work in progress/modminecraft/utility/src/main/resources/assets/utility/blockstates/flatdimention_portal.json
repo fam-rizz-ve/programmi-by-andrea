@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "axis=z": {
+      "model": "utility:block/flatdimention_portal_ew"
+    },
+    "axis=x": {
+      "model": "utility:block/flatdimention_portal_ns"
+    }
+  }
+}

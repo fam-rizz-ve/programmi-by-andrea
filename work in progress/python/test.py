@@ -1,8 +1,2 @@
-a = {"banana": "buona"}
-
-try:
-    x = a["banana"]
-except:
-    print("d")
-finally:
-    print("G")
+a = ["banana","kiwi"]
+b = int(a[1])

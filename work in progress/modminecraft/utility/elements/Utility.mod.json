@@ -1,0 +1,11 @@
+{
+  "_fv": 77,
+  "_type": "tab",
+  "definition": {
+    "name": "Utility",
+    "icon": {
+      "value": "CUSTOM:Nightelmet.helmet"
+    },
+    "showSearch": false
+  }
+}

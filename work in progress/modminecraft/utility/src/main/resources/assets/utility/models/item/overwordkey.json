@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "utility:item/chiave_pixelata_su_sfondo_a_scacchi_1"
+  }
+}
