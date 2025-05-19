@@ -13,13 +13,13 @@ import net.mcreator.utility.procedures.OverwordkeyRightclickedOnBlockProcedure;
 
 public class OverwordkeyItem extends Item {
 	public OverwordkeyItem() {
-		super(new Item.Properties().stacksTo(64).rarity(Rarity.EPIC));
+		super(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC));
 	}
 
 	@Override
 	public InteractionResultHolder<ItemStack> use(Level world, Player entity, InteractionHand hand) {
 		InteractionResultHolder<ItemStack> ar = super.use(world, entity, hand);
-		OverwordkeyRightclickedOnBlockProcedure.execute(world, entity);
+		OverwordkeyRightclickedOnBlockProcedure.execute(entity);
 		return ar;
 	}
 }

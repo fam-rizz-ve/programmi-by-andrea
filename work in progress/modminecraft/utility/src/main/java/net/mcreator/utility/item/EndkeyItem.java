@@ -13,13 +13,13 @@ import net.mcreator.utility.procedures.EndKeyRightclickedOnBlockProcedure;
 
 public class EndkeyItem extends Item {
 	public EndkeyItem() {
-		super(new Item.Properties().stacksTo(64).rarity(Rarity.EPIC));
+		super(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC));
 	}
 
 	@Override
 	public InteractionResultHolder<ItemStack> use(Level world, Player entity, InteractionHand hand) {
 		InteractionResultHolder<ItemStack> ar = super.use(world, entity, hand);
-		EndKeyRightclickedOnBlockProcedure.execute(world, entity);
+		EndKeyRightclickedOnBlockProcedure.execute(entity);
 		return ar;
 	}
 }

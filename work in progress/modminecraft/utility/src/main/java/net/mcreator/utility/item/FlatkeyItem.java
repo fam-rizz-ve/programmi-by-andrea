@@ -13,13 +13,13 @@ import net.mcreator.utility.procedures.FlatkeyRightclickedOnBlockProcedure;
 
 public class FlatkeyItem extends Item {
 	public FlatkeyItem() {
-		super(new Item.Properties().stacksTo(64).rarity(Rarity.EPIC));
+		super(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC));
 	}
 
 	@Override
 	public InteractionResultHolder<ItemStack> use(Level world, Player entity, InteractionHand hand) {
 		InteractionResultHolder<ItemStack> ar = super.use(world, entity, hand);
-		FlatkeyRightclickedOnBlockProcedure.execute(world, entity);
+		FlatkeyRightclickedOnBlockProcedure.execute(entity);
 		return ar;
 	}
 }

@@ -10,6 +10,6 @@ public class NightelmetHelmetTickEventProcedure {
 		if (entity == null)
 			return;
 		if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-			_entity.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 2, 1, true, false));
+			_entity.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 1, 0, false, false));
 	}
 }

@@ -4,9 +4,13 @@
       "type": "minecraft:flat",
       "settings": {
         "layers": [
+        {
+            "block": "minecraft:air",
+            "height": 60
+          },
           {
             "block": "minecraft:bedrock",
-            "height": 6
+            "height": 1
           },
           {
             "block": "minecraft:dirt",
@@ -17,10 +21,8 @@
             "height": 1
           }
         ],
-        "biome": "minecraft:plains",
-        "structures": {
-          "structures": []
-        }
-      }
+        "biome": "utility:flat_biom",
+      "structure_overrides": false
     }
   }
+}

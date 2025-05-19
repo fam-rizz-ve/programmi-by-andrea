@@ -9,17 +9,17 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.InteractionHand;
 
-import net.mcreator.utility.procedures.NetherKeyRightclickedOnBlockProcedure;
+import net.mcreator.utility.procedures.NetherkeyRightclickedOnBlockProcedure;
 
 public class NetherkeyItem extends Item {
 	public NetherkeyItem() {
-		super(new Item.Properties().stacksTo(64).rarity(Rarity.EPIC));
+		super(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC));
 	}
 
 	@Override
 	public InteractionResultHolder<ItemStack> use(Level world, Player entity, InteractionHand hand) {
 		InteractionResultHolder<ItemStack> ar = super.use(world, entity, hand);
-		NetherKeyRightclickedOnBlockProcedure.execute(world, entity);
+		NetherkeyRightclickedOnBlockProcedure.execute(entity);
 		return ar;
 	}
 }
