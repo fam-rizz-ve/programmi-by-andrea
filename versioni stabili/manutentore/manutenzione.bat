@@ -55,7 +55,7 @@ if not exist %USERPROFILE%\accettato_termini_e_condizioni.txt (
 )
 echo desidera svuotare il cestino?
 choice /c SNC /m "vuoi procedere? clicca: S per accettare; N per saltare; C per continuare in autonomia"
-if errorlevel ==3 (goto :tutto_dritto)
+if errorlevel ==3 (goto :tutto_dritto_cestino)
 if errorlevel ==2 (goto :svuota_cache_domanda)
 :svuota_cestino
 	PowerShell -NoProfile -Command "Clear-RecycleBin -Force"
@@ -63,7 +63,7 @@ if errorlevel ==2 (goto :svuota_cache_domanda)
 	cls
 	echo desidera eliminare le cache?
 	choice /c SNC /m "vuoi procedere? clicca: S per accettare; N per saltare; C per continuare in autonomia"
-	if errorlevel ==3 (goto tutto_dritto)
+	if errorlevel ==3 (goto tutto_dritto_cache)
 	if errorlevel ==2 (goto domanda_file_non_necessari)
 :svuotamento_cache
 	del /q/f/s %TEMP%\*
@@ -71,7 +71,7 @@ if errorlevel ==2 (goto :svuota_cache_domanda)
 	cls
 	echo desidera eliminare i file temporanei?
 	choice /c SNC /m "vuoi procedere? clicca: S per accettare; N per saltare; C per continuare in autonomia"
-	if errorlevel ==3 (goto tutto_dritto)
+	if errorlevel ==3 (goto tutto_dritto_file_temp)
 	if errorlevel ==2 (goto domanda_aggionamento_applicazioni)
 :eliminazione_file_NON_NECESSARI
 	cleanmgr /sagerun:1
@@ -79,7 +79,7 @@ if errorlevel ==2 (goto :svuota_cache_domanda)
 	cls
 	echo vuoi aggiornare tutte le applicazioni?
 	choice /c SNC /m "vuoi procedere? clicca: S per accettare; N per saltare; C per continuare in autonomia"
-	if errorlevel ==3 (goto tutto_dritto)
+	if errorlevel ==3 (goto tutto_dritto_aggiornamento_applicazioni)
 	if errorlevel ==2 (goto domanda_aggiornamento_driver)
 :aggiornamento_applicazioni
 	cls
@@ -95,28 +95,27 @@ if %errorlevel% neq 0 (
 	cls
 	echo vuoi aggiornare tutti i driver?
 	choice /c SNC /m "vuoi procedere? clicca: S per accettare; N per saltare; C per continuare in autonomia"
-	if errorlevel ==3 (goto tutto_dritto)
+	if errorlevel ==3 (goto tutto_dritto_aggiornamento_driver)
 	if errorlevel ==2 (goto domanda_controllo_integrità)
 :Aggiornamento_driver
-REM Esegui lo script PowerShell
-powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0aggiorna_driver.ps1"
+	REM Esegui lo script PowerShell
+	powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0aggiorna_driver.ps1"
 
-REM Mappa dei codici di uscita
-set "msg="
-if %errorlevel% equ 0 set "msg=Installazione completata con successo."
-if %errorlevel% equ 1 set "msg=Errore: lo script deve essere eseguito come amministratore."
-if %errorlevel% equ 2 set "msg=Riavvio richiesto dopo l'installazione degli aggiornamenti."
-if %errorlevel% equ 3 set "msg=Errore sconosciuto durante l'esecuzione dello script."
+	REM Mappa dei codici di uscita
+	set "msg="
+	if %errorlevel% equ 0 set "msg=Installazione completata con successo."
+	if %errorlevel% equ 1 set "msg=Errore: lo script deve essere eseguito come amministratore."
+	if %errorlevel% equ 2 set "msg=Riavvio richiesto dopo l'installazione degli aggiornamenti."
+	if %errorlevel% equ 3 set "msg=Errore sconosciuto durante l'esecuzione dello script."
 
-REM Visualizza il messaggio corrispondente al codice di uscita
-echo %msg%
-pause
-exit /b %errorlevel%
+	REM Visualizza il messaggio corrispondente al codice di uscita
+	echo %msg%
+	timeout /t 5 /nobreak
 :domanda_controllo_integrità
 	cls
-	echo vuoi fare un controllo integrità?
+	echo vuoi fare un controllo di integrita?
 	choice /c SNC /m "vuoi procedere? clicca: S per accettare; N per saltare; C per continuare in autonomia"
-	if errorlevel ==3 (goto tutto_dritto)
+	if errorlevel ==3 (goto tutto_dritto_controllo_integrità)
 	if errorlevel ==2 (goto domanda_aggiornamenti_windows)
 :controllo_integrità
 	cls
@@ -126,37 +125,59 @@ exit /b %errorlevel%
 	cls
 	echo vuoi aggiornare windows?
 	choice /c SNC /m "vuoi procedere? clicca: S per accettare; N per saltare; C per continuare in autonomia"
-	if errorlevel ==3 (goto tutto_dritto)
+	if errorlevel ==3 (goto tutto_dritto_aggiornare_windows)
 	if errorlevel ==2 (goto domanda_controllo_con_windows_defender)
 :aggiornamento_windows
 	wuauclt /detectnow /updatenow
 :domanda_controllo_con_windows_defender
 	cls
-	echo usare windows defender per scovare eventuLI Malware?
+	echo usare windows defender per scovare eventuali Malware?
 	choice /c SNC /m "vuoi procedere? clicca: S per accettare; N per saltare; C per continuare in autonomia"
-	if errorlevel ==3 (goto tutto_dritto)
+	if errorlevel ==3 (goto tutto_dritto_windows_defender)
 	if errorlevel ==2 (goto fine)
 :scannerizzazione_dispositivo
 	"%ProgramFiles%\Windows Defender\MpCmdRun.exe" -SignatureUpdate
 	"%ProgramFiles%\Windows Defender\MpCmdRun.exe" -Scan -ScanType 1
 	goto fine
-:tutto_dritto
+rem inizio tutto dritto
+:tutto_dritto_cestino
 	PowerShell -NoProfile -Command "Clear-RecycleBin -Force"
+:tutto_dritto_cache
 	del /q/f/s %TEMP%\
+:tutto_dritto_file_temp
 	cleanmgr /sagerun:1
+:tutto_dritto_aggiornamento_applicazioni
 	winget upgrade --all --accept-package-agreements --accept-source-agreements --include-unknown
-	dism /online /cleanup-image /restorehealth
-	sfc /scannow
-	wuauclt /detectnow /updatenow
-	"%ProgramFiles%\Windows Defender\MpCmdRun.exe" -SignatureUpdate
-	"%ProgramFiles%\Windows Defender\MpCmdRun.exe" -Scan -ScanType 1
 	if exist %USERPROFILE%\scoop (call scoop update * --global)
 	where python.exe >nul 2>&1
 if %errorlevel% neq 0 (
-    echo Python non è installato.
+	echo Python non è installato.
 ) else (
-    echo Python installato. Aggiornamento di pip...
-    python.exe -m pip install --upgrade pip
+	echo Python installato. Aggiornamento di pip...
+	python.exe -m pip install --upgrade pip
+)
+:tutto_dritto_aggiornamento_driver
+	REM Esegui lo script PowerShell
+	powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0aggiorna_driver.ps1"
+
+	REM Mappa dei codici di uscita
+	set "msg="
+	if %errorlevel% equ 0 set "msg=Installazione completata con successo."
+	if %errorlevel% equ 1 set "msg=Errore: lo script deve essere eseguito come amministratore."
+	if %errorlevel% equ 2 set "msg=Riavvio richiesto dopo l'installazione degli aggiornamenti."
+	if %errorlevel% equ 3 set "msg=Errore sconosciuto durante l'esecuzione dello script."
+
+	REM Visualizza il messaggio corrispondente al codice di uscita
+	echo %msg%
+	timeout /t 5 /nobreak
+:tutto_dritto_controllo_integrità
+	dism /online /cleanup-image /restorehealth
+	sfc /scannow
+:tutto_dritto_aggiornare_windows
+	wuauclt /detectnow /updatenow
+:tutto_dritto_windows_defender
+	"%ProgramFiles%\Windows Defender\MpCmdRun.exe" -SignatureUpdate
+	"%ProgramFiles%\Windows Defender\MpCmdRun.exe" -Scan -ScanType 1
 :fine
 	cls
 	echo grazie per aver usufruito del nostro servizio
