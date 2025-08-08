@@ -59,22 +59,6 @@ if errorlevel ==3 (goto :tutto_dritto_cestino)
 if errorlevel ==2 (goto :svuota_cache_domanda)
 :svuota_cestino
 	PowerShell -NoProfile -Command "Clear-RecycleBin -Force"
-:svuota_cache_domanda
-	cls
-	echo desidera eliminare le cache?
-	choice /c SNC /m "vuoi procedere? clicca: S per accettare; N per saltare; C per continuare in autonomia"
-	if errorlevel ==3 (goto tutto_dritto_cache)
-	if errorlevel ==2 (goto domanda_file_non_necessari)
-:svuotamento_cache
-	del /q/f/s %TEMP%\*
-:domanda_file_non_necessari
-	cls
-	echo desidera eliminare i file temporanei?
-	choice /c SNC /m "vuoi procedere? clicca: S per accettare; N per saltare; C per continuare in autonomia"
-	if errorlevel ==3 (goto tutto_dritto_file_temp)
-	if errorlevel ==2 (goto domanda_aggionamento_applicazioni)
-:eliminazione_file_NON_NECESSARI
-	cleanmgr /sagerun:1
 :domanda_aggionamento_applicazioni
 	cls
 	echo vuoi aggiornare tutte le applicazioni?
@@ -142,10 +126,6 @@ if %errorlevel% neq 0 (
 rem inizio tutto dritto
 :tutto_dritto_cestino
 	PowerShell -NoProfile -Command "Clear-RecycleBin -Force"
-:tutto_dritto_cache
-	del /q/f/s %TEMP%\
-:tutto_dritto_file_temp
-	cleanmgr /sagerun:1
 :tutto_dritto_aggiornamento_applicazioni
 	winget upgrade --all --accept-package-agreements --accept-source-agreements --include-unknown
 	if exist %USERPROFILE%\scoop (call scoop update * --global)
